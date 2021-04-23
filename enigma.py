@@ -1,5 +1,6 @@
-#Author Dario Clavijo 2021
-# Heaviliy based on https://github.com/mikepound/enigma
+# Author Dario Clavijo 2021
+# Heavily based on https://github.com/mikepound/enigma
+# GPLv3
 
 class Rotor:
     def __init__(self,name, encoding, rotorPosition, notchPosition, ringSetting):
