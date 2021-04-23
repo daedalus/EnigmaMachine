@@ -1,3 +1,6 @@
+#Author Dario Clavijo 2021
+# Heaviliy based on https://github.com/mikepound/enigma
+
 class Rotor:
     def __init__(self,name, encoding, rotorPosition, notchPosition, ringSetting):
         #print(self,name, encoding, rotorPosition, notchPosition, ringSetting)
