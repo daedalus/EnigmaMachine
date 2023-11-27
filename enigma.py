@@ -14,28 +14,28 @@ class Rotor:
 
     def isAtNotch(self):
         if self.name in ['VI','VII','VIII']:
-            return self.rotorPosition == 12 or self.rotorPosition == 25
+            return self.rotorPosition in [12, 25]
         else:
             return self.notchPosition == self.rotorPosition
 
-    def Create(name, rotorPosition, ringSetting):
-        #print("Rotor.Create",name, rotorPosition, ringSetting) 
-        if name == "I":
+    def Create(self, rotorPosition, ringSetting):
+        #print("Rotor.Create",name, rotorPosition, ringSetting)
+        if self == "I":
             return Rotor("I","EKMFLGDQVZNTOWYHXUSPAIBRCJ", rotorPosition, 16, ringSetting)
-        elif name == "II":
+        elif self == "II":
             return Rotor("II","AJDKSIRUXBLHWTMCQGZNPYFVOE", rotorPosition, 4, ringSetting)
-        elif name == "III":
+        elif self == "III":
             return Rotor("III","BDFHJLCPRTXVZNYEIWGAKMUSQO", rotorPosition, 21, ringSetting)
-        elif name == "IV":
+        elif self == "IV":
             return Rotor("IV","ESOVPZJAYQUIRHXLNFTGKDCMWB", rotorPosition, 9, ringSetting)
-        elif name == "V":
+        elif self == "V":
             return Rotor("V","VZBRGITYUPSDNHLXAWMJQOFECK", rotorPosition, 25, ringSetting)
-        elif name == "VI":
+        elif self == "VI":
             return Rotor("VI","JPGVOUMFYQBENHZRDKASXLICTW", rotorPosition, 0, ringSetting)
-        elif name == "VII":
+        elif self == "VII":
             return Rotor("VII","NZJHGRCXMYSWBOUFAIVLPEKQDT", rotorPosition, 0, ringSetting)
-        elif name == "VIII":
-            return Rotor("VIII","FKQHTLXOCBJSPDZRAMEWNIUYGV", rotorPosition, 0, ringSetting) 
+        elif self == "VIII":
+            return Rotor("VIII","FKQHTLXOCBJSPDZRAMEWNIUYGV", rotorPosition, 0, ringSetting)
         else:
             return Rotor("Identity","ABCDEFGHIJKLMNOPQRSTUVWXYZ", rotorPosition, 0, ringSetting)
 
@@ -80,8 +80,7 @@ class Plugboard:
         return self.wiring[c]
     
     def identityPlugboard(self):
-        mapping = [x for x in range(0,26)]
-        return mapping    
+        return list(range(0,26))    
 
     def removeChar(self,unpluggedCharacters,c):
         try:
@@ -91,9 +90,7 @@ class Plugboard:
         return unpluggedCharacters
  
     def getUnpluggedCharacters(self,plugboard):
-        unpluggedCharacters = []
-        for i in range(0,26):
-            unpluggedCharacters.append(i)
+        unpluggedCharacters = list(range(0,26))
         if plugboard == "":
             return unpluggedCharacters
         for i in range(0,len(plugboard),2):
@@ -104,8 +101,8 @@ class Plugboard:
         return unpluggedCharacters   
 
     def decodePlugboard(self, plugboard):
-        if plugboard == None or plugboard == "":
-           return self.identityPlugboard()
+        if plugboard is None or plugboard == "":
+            return self.identityPlugboard()
         mapping = self.identityPlugboard()
         if len(plugboard) % 2 != 0:
            return self.identityPlugboard()
@@ -115,8 +112,7 @@ class Plugboard:
             c2 = ord(plugboard[i+1]) - 65
             if c1 in pluggedCharacters or c2 in pluggedCharacters:
                 return self.identityPlugboard()
-            pluggedCharacters.append(c1)
-            pluggedCharacters.append(c1)
+            pluggedCharacters.extend((c1, c1))
             mapping[c1] = c2
             mapping[c2] = c1
         #print(mapping)
@@ -126,10 +122,10 @@ class Reflector:
   def __init__(self, encoding):
      self.forwardWiring = self.decodeWiring(encoding)
    
-  def Create(name):
-      if name == "B":
+  def Create(self):
+      if self == "B":
           return Reflector("YRUHQSLDPXNGOKMIEBFZCWVJAT")
-      elif name == "C":
+      elif self == "C":
           return Reflector("FVPJIAOYEDRZXWGCTKUQSBNMHL")
       else:
           return Reflector("ZYXWVUTSRQPONMLKJIHGFEDCBA")
